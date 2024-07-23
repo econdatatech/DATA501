@@ -1,1 +1,3 @@
-test
+shapirowilk<-function(x, AD=FALSE){
+  
+}
