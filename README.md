@@ -3,7 +3,7 @@
 This is a repository for Assignment 1 of the DATA 501 class 2024 from Victoria University Wellington
 https://www.wgtn.ac.nz/courses/data/501/2024/offering?crn=33170
 
-The assignment is to create an R project that contains an R program with the following specs:
+The assignment is to create a R project that contains a R program with the following specs:
 
 The user will provide the program with a data sets. The program will calculate and return the test statistics
 W used in a Shapiro–Wilk test used to determine if the sample is normally distributed.
@@ -21,6 +21,6 @@ The program will have the following features:
   * wrong format
   * wrong dimensions
   
-Further more a Rmarkdown file. This file displays the chunk of code of the main R-file, and explains the
+Furthermore a Rmarkdown file is required which displays the chunk of code of the main R-file, and explains the
 two test. The Rmarkdown file will also include the link to the GitHub repository (and if need additional
 instructions).
