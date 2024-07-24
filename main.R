@@ -1,4 +1,4 @@
-shapirowilk<-function(x, AD=FALSE){
+shapirowilk<-function(x, Interpret=FALSE){
   datname <- deparse(substitute(x))
   
   ##Error handling
@@ -55,8 +55,9 @@ shapirowilk<-function(x, AD=FALSE){
       stop(e)
     }
   )
-  
- shapiro.test(x[!is.na(x) & !is.infinite(x)])
+ result= shapiro.test(x[!is.na(x) & !is.infinite(x)])
+ if(Interpret){result$method<-"Test method: Shapiro-Wilk normality test. Explanation: The null hypothesis is that the data is normally distributed. So rejecting H0 (a p value lower than a chosen alpha level of e.g. 0.05) means that there is evidence that the data is not normally distributed. It is advisable to check the effect size of the non-normality with a Q-Q plot."}
+ return(result)
 }  
 
 
