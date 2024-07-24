@@ -362,7 +362,8 @@ display: none;
 <p>This is an R Markdown document. Markdown is a simple formatting
 syntax for authoring HTML, PDF, and MS Word documents. For more details
 on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<pre class="r"><code>knitr::spin_child(&#39;main.R&#39;)</code></pre>
+<pre class="r"><code>download.file(&#39;https://raw.githubusercontent.com/econdatatech/DATA501-A1/main/main.R&#39;,&#39;main_.R&#39;,quiet=T)
+knitr::spin_child(&#39;main_.R&#39;)</code></pre>
 <pre class="r"><code>shapirowilk&lt;-function(x, AD=FALSE){
   datname &lt;- deparse(substitute(x))
   
@@ -423,18 +424,15 @@ on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http:
   )
   
  shapiro.test(x[!is.na(x) &amp; !is.infinite(x)])
-}  
-
-
-  
-
-  #https://github.com/wch/r-source/blob/trunk/src/library/stats/R/shapiro.test.R
-
-  #input validation
-  
-  #two very basic / simple tests
-  
-  #catches: NA, inf, wrong format, wrong dimension,</code></pre>
+}  </code></pre>
+<pre class="r"><code>shapirowilk(c(2,Inf,3,NA,2,4,4))</code></pre>
+<pre><code>## It appears that the input vector contains NA values. They will be filterd out.</code></pre>
+<pre><code>## It appears that the input vector contains INF values. They will be filterd out.</code></pre>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  x[!is.na(x) &amp; !is.infinite(x)]
+## W = 0.82083, p-value = 0.1185</code></pre>
 </div>
 
 

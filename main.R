@@ -30,7 +30,7 @@ shapirowilk<-function(x, AD=FALSE){
       stopifnot(!anyNA(x))
     }, 
     error=function(e){
-      message('It appears that the input vector contains NA values. They will be filterd out.')
+      warning(paste0('It appears that the input vector contains NA values. They will be filterd out.',"\n",e))
     }
   )
   
@@ -40,8 +40,7 @@ shapirowilk<-function(x, AD=FALSE){
       stopifnot(all(is.finite(na.omit(x))))
     }, 
     error=function(e){
-      message('It appears that the input vector contains INF values. They will be filterd out.')
-      filteredx<-na.omit(x)
+      warning(paste0('It appears that the input vector contains INF values. They will be filterd out.',"\n",e))
     }
   )
 
@@ -60,4 +59,7 @@ shapirowilk<-function(x, AD=FALSE){
  shapiro.test(x[!is.na(x) & !is.infinite(x)])
 }  
 
+
+  
+  
  

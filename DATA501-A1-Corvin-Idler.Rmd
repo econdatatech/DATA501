@@ -14,5 +14,10 @@ The link to to the code respositry underpinning this file is: https://github.com
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
 ```{r}
-knitr::spin_child('main.R')
+download.file('https://raw.githubusercontent.com/econdatatech/DATA501-A1/main/main.R','main_.R',quiet=T)
+knitr::spin_child('main_.R')
+```
+
+```{r}
+shapirowilk(c(2,Inf,3,NA,2,4,4))
 ```
