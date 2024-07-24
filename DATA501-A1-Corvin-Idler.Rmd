@@ -9,7 +9,7 @@ date: "2024-07-23"
 ```{r setup, include=FALSE}
 library(formatR)
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_chunk$set(tidy.opts=list(width.cutoff=60), tidy=TRUE)
+knitr::opts_chunk$set(tidy.opts=list(width.cutoff=80), tidy=TRUE)
 
 ```
 The link to to the code respositry underpinning this file is: https://github.com/econdatatech/DATA501-A1
