@@ -7,12 +7,12 @@ date: "2024-07-23"
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
+The link to to the code respositry underpinning this file is: https://github.com/econdatatech/DATA501-A1
 
 ## R Markdown
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-```{r cars}
-
-````
+```{r}
+knitr::spin_child('main.R')
+```

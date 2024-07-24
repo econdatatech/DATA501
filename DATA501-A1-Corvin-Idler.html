@@ -356,15 +356,85 @@ display: none;
 </div>
 
 
+<p>The link to to the code respositry underpinning this file is: <a href="https://github.com/econdatatech/DATA501-A1" class="uri">https://github.com/econdatatech/DATA501-A1</a></p>
 <div id="r-markdown" class="section level2">
 <h2>R Markdown</h2>
 <p>This is an R Markdown document. Markdown is a simple formatting
 syntax for authoring HTML, PDF, and MS Word documents. For more details
 on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>When you click the <strong>Knit</strong> button a document will be
-generated that includes both content as well as the output of any
-embedded R code chunks within the document. You can embed an R code
-chunk like this:</p>
+<pre class="r"><code>knitr::spin_child(&#39;main.R&#39;)</code></pre>
+<pre class="r"><code>shapirowilk&lt;-function(x, AD=FALSE){
+  datname &lt;- deparse(substitute(x))
+  
+  ##Error handling
+  #check if input parameter is empty
+  tryCatch(
+    {
+      stopifnot(!missing(x))
+    }, 
+    error=function(e){
+      message(&#39;It appears that no input data set was specified. Make sure to pass a numeric vector to the function.&#39;)
+      stop(e)
+    }
+  )
+
+  #check if input parameter is a numeric vector
+  tryCatch(
+    {
+      stopifnot(is.numeric(x))
+    }, 
+    error=function(e){
+      message(paste0(&#39;It appears that the input is not a numeric vector but instead of class &#39;,class(x)))
+      stop(e)
+    }
+  )
+  
+  #check if NAs are present and filter
+  tryCatch(
+    {
+      stopifnot(!anyNA(x))
+    }, 
+    error=function(e){
+      message(&#39;It appears that the input vector contains NA values. They will be filterd out.&#39;)
+    }
+  )
+  
+  #check if inf are present and filter
+  tryCatch(
+    {
+      stopifnot(all(is.finite(na.omit(x))))
+    }, 
+    error=function(e){
+      message(&#39;It appears that the input vector contains INF values. They will be filterd out.&#39;)
+      filteredx&lt;-na.omit(x)
+    }
+  )
+
+  #check if vector has the right length
+  tryCatch(
+    {
+      n&lt;-length(x[!is.na(x) &amp; !is.infinite(x)])
+      stopifnot(n &gt;=3 &amp;&amp; n &lt;=5000)
+    }, 
+    error=function(e){
+      message(&#39;It appears that the input vector is shorter then 3 or longer than 5000. That might be due to filtering out INF and NA values. Make sure to stay within these limits.&#39;)
+      stop(e)
+    }
+  )
+  
+ shapiro.test(x[!is.na(x) &amp; !is.infinite(x)])
+}  
+
+
+  
+
+  #https://github.com/wch/r-source/blob/trunk/src/library/stats/R/shapiro.test.R
+
+  #input validation
+  
+  #two very basic / simple tests
+  
+  #catches: NA, inf, wrong format, wrong dimension,</code></pre>
 </div>
 
 
