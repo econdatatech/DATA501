@@ -9,9 +9,11 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 The link to to the code respositry underpinning this file is: https://github.com/econdatatech/DATA501-A1
 
-## R Markdown
+# Code of the Shapiro-Wilk test function
+This section will download the main.R file from the repository (to make sure code is maintained at one single place)
+So it needs a working internet connection.
+The additional parameter (Interpret=TRUE) of my function allows to add interpretation explanations to the result.
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
 ```{r}
 download.file('https://raw.githubusercontent.com/econdatatech/DATA501-A1/main/main.R','main_.R',quiet=T)
@@ -20,4 +22,40 @@ knitr::spin_child('main_.R')
 
 ```{r}
 shapirowilk(c(2,Inf,3,NA,2,4,4))
+
+shapirowilk(c(2,Inf,3,2,4,4),T)
+```
+
+
+
+# Test cases for the Shapiro-Wilk test function
+We use the testthat package to perform unit tests for presence of NA, Inf values, as well as wrong data type.
+We also test the case of running the function with valid input data.
+I decided to autofix presence of NA and Inf in the function. So the presence of these values will throw warnings not errors. 
+The test cases account for that.
+```{r}
+library(testthat)
+
+# Test for NA warnings
+test_that("we test NA handling of shapirowilk()", {
+    expect_warning(shapirowilk(c(2, 3, NA, 2, 4, 4)))
+})
+
+# Test for Inf warnings
+test_that("we test Inf handling of shapirowilk()", {
+    expect_warning(shapirowilk(c(2, 3, Inf, 2, 4, 4)))
+})
+
+# Test for wrong data types
+test_that("we test wrong data type handling of shapirowilk()", {
+    expect_error(shapirowilk(c(2, 3, 'a', 2, 4, 4)))
+})
+
+# Test with correct input data
+test_that("We test shapirowilk() with correct input", {
+    expect_silent(shapirowilk(rnorm(50)))
+    expect_s3_class(shapirowilk(rnorm(50)), "htest")
+})
+
+
 ```

@@ -12,7 +12,7 @@ The program will have the following features:
 
 * at least two inputs (1 required and 1 default/optional)
   * required input is the data
-  * optional/default input (my choice: to perform also the Anderson–Darling test)
+  * optional/default input (my choice: to add interpretation explanations in the htest result)
 * input validation
 * at least two very basic/simple tests
 * catches errors
