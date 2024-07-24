@@ -1,6 +1,8 @@
 ---
 title: "DATA501 Assignement 1 - Corvin Idler - ID 300598312"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 date: "2024-07-23"
 ---
 
