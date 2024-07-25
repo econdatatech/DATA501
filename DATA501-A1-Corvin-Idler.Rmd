@@ -43,22 +43,29 @@ library(testthat)
 
 # Test for NA warnings
 test_that("we test NA handling of shapirowilk()", {
-    expect_warning(shapirowilk(c(2, 3, NA, 2, 4, 4)))
+    expect_warning(shapirowilk(c(2, 3, NA, 2, 4, 4)),
+                   
+    'It appears that the input vector contains NA values. 
+                     They will be filterd out.')
 })
 
 # Test for Inf warnings
 test_that("we test Inf handling of shapirowilk()", {
-    expect_warning(shapirowilk(c(2, 3, Inf, 2, 4, 4)))
+    expect_warning(shapirowilk(c(2, 3, Inf, 2, 4, 4)),
+                   
+    'It appears that the input vector contains INF values. 
+                     They will be filterd out.')
 })
 
 # Test for wrong data types
 test_that("we test wrong data type handling of shapirowilk()", {
-    expect_error(shapirowilk(c(2, 3, 'a', 2, 4, 4)))
+    expect_error(shapirowilk(c(2, 3, 'a', 2, 4, 4)),
+    'is.numeric\\(x\\) is not TRUE')
 })
 
 # Test with correct input data
 test_that("We test shapirowilk() with correct input", {
-    expect_silent(shapirowilk(rnorm(50)))
+    expect_no_error(shapirowilk(rnorm(50)))
     expect_s3_class(shapirowilk(rnorm(50)), "htest")
 })
 
