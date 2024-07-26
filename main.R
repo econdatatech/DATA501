@@ -68,7 +68,7 @@ shapirowilk<-function(x, Interpret=FALSE){
   aistar <- numeric(n)
   ai <- numeric(n)
   
-  # Compute mi, fi, and tailterm of equation 19 in 
+  # Compute mi, phii, and tailterm of equation 19 in 
   # https://www.tandfonline.com/doi/abs/10.1080/02664769723828
   tailterm[1] <- 0.0
   tailterm[n+2] <- 0.0

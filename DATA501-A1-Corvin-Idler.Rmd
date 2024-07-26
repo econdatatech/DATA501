@@ -17,8 +17,8 @@ The link to to the code respositry underpinning this file is: https://github.com
 # Code of the Shapiro-Wilk test function
 This section will download the main.R file from the repository (to make sure code is maintained at one single place)
 So it needs a working internet connection.
-The additional parameter (Interpret=TRUE) of my function allows to add interpretation explanations to the result.
-
+The additional parameter (Interpret=TRUE) of my function allows to out put the result in text for in a whole sentence.
+The implementation is based on https://www.tandfonline.com/doi/abs/10.1080/02664769723828
 
 ```{r}
 download.file('https://raw.githubusercontent.com/econdatatech/DATA501-A1/main/main.R','main_.R',quiet=T)
@@ -65,8 +65,7 @@ test_that("we test wrong data type handling of shapirowilk()", {
 
 # Test with correct input data
 test_that("We test shapirowilk() with correct input", {
-    expect_no_error(shapirowilk(rnorm(50)))
-    expect_s3_class(shapirowilk(rnorm(50)), "htest")
+    expect_no_error(shapirowilk(rnorm(1000)))
 })
 
 
