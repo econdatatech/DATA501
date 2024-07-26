@@ -76,15 +76,15 @@ shapirowilk<-function(x, Interpret=FALSE){
     #equation 13 and 14 
     mi[i] <- qnorm(i / (n + 1), mean = 0.0, sd = 1.0, lower.tail = T, log.p = F)
     #prep work for equation (19)
-    fi[i] <- dnorm(mi[i], mean = 0.0, sd = 1.0, log = FALSE)
+    phii[i] <- dnorm(mi[i], mean = 0.0, sd = 1.0, log = FALSE)
     #prep work for equation (19) (tail part of it)
-    tailterm[i+1] <-  mi[i] * fi[i]
+    tailterm[i+1] <-  mi[i] *  phii[i]
   }
   
   # Compute aistar equation 19
   for (i in 1:n) {
     #final calculation of equation 19
-    aistar[i] <- -((n + 1) * (n + 2)) * fi[i] * (tailterm[i]   
+    aistar[i] <- -((n + 1) * (n + 2)) * phii[i] * (tailterm[i]   
                                                  - 2 * tailterm[i+1] + tailterm[i+2])
   }
   # Compute ai according to equation 17
