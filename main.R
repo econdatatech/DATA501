@@ -90,16 +90,15 @@ shapirowilk<-function(x, Interpret=FALSE){
   # Compute ai according to equation 17
   ai <- aistar / as.vector(sqrt(aistar %*% aistar))
   # Sort x (c.f. section above equation 1)
-  xs <- sort(x)
-  
+
   # Compute meanX
-  meanX <- mean(xs)
+  meanX <- mean(x)
   
   # Compute equation 3
-  S <- sum((xs - meanX)^2)
+  S <- sum((x - meanX)^2)
   
   # Compute W
-  W <- as.vector((ai %*% xs))^2 / S
+  W <- as.vector((ai %*% x))^2 / S
   
   # Return the test statistic W
   result<-W
