@@ -5,7 +5,7 @@ https://www.wgtn.ac.nz/courses/data/501/2024/offering?crn=33170
 
 The assignment is to create a R project that contains a R program with the following specs:
 
-The user will provide the program with a data sets. The program will calculate and return the test statistics
+The user will provide the program with a data sets. The program will calculate and return the test statistic
 W used in a Shapiro–Wilk test used to determine if the sample is normally distributed.
 
 The program will have the following features:
