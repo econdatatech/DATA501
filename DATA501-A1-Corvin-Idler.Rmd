@@ -17,7 +17,7 @@ The link to to the code respositry underpinning this file is: https://github.com
 # Code of the Shapiro-Wilk test function
 This section will download the main.R file from the repository (to make sure code is maintained at one single place)
 So it needs a working internet connection.
-The additional parameter (Interpret=TRUE) of my function allows to out put the result in text for in a whole sentence.
+The additional parameter (Interpret=TRUE) of my function allows to output the result in textform in a whole sentence.
 The implementation is based on https://www.tandfonline.com/doi/abs/10.1080/02664769723828
 
 ```{r}
