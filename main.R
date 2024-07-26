@@ -48,32 +48,64 @@ shapirowilk<-function(x, Interpret=FALSE){
     }
   )
 
-  #check if vector has the right length
-  tryCatch(
-    {
-      n<-length(x[!is.na(x) & !is.infinite(x)])
-      stopifnot(n >=3 && n <=5000)
-    }, 
-    error=function(e){
-      message('It appears that the input vector is shorter then 3 
-              or longer than 5000. 
-              That might be due to filtering out INF and NA values. 
-              Make sure to stay within these limits.')
-      stop(e)
-    }
-  )
- result= shapiro.test(x[!is.na(x) & !is.infinite(x)])
- if(Interpret){
-  result$method<-"Test method: Shapiro-Wilk normality test. 
-  Explanation: The null hypothesis is that the data is normally distributed. 
-  So rejecting H0 (a p value lower than a chosen alpha level of e.g. 0.05) means 
-  that there is evidence that the data is not normally distributed. 
-  It is advisable to check the effect size of the non-normality with a Q-Q plot."
+  x <- sort(x[!is.na(x) & !is.infinite(x)])
+  
+  n=length(x)
+  #some more error handling based on shapiro.test.R in stats package
+  rng <- x[n] - x[1L]
+  if(rng == 0) stop("all 'x' values are identical")
+  if(rng < 1e-10) x <- x/rng # rescale to avoid ifault=6 with single version.
+
+  #number crunching starts
+  #based on https://www.tandfonline.com/doi/abs/10.1080/02664769723828
+  
+  n <- length(x)
+  
+  # Initialize variable vectors
+  mi <- numeric(n)
+  phii <- numeric(n) 
+  tailterm <- numeric(n+2)
+  aistar <- numeric(n)
+  ai <- numeric(n)
+  
+  # Compute mi, fi, and tailterm of equation 19 in 
+  # https://www.tandfonline.com/doi/abs/10.1080/02664769723828
+  tailterm[1] <- 0.0
+  tailterm[n+2] <- 0.0
+  for (i in 1:n) { 
+    #equation 13 and 14 
+    mi[i] <- qnorm(i / (n + 1), mean = 0.0, sd = 1.0, lower.tail = T, log.p = F)
+    #prep work for equation (19)
+    fi[i] <- dnorm(mi[i], mean = 0.0, sd = 1.0, log = FALSE)
+    #prep work for equation (19) (tail part of it)
+    tailterm[i+1] <-  mi[i] * fi[i]
+  }
+  
+  # Compute aistar equation 19
+  for (i in 1:n) {
+    #final calculation of equation 19
+    aistar[i] <- -((n + 1) * (n + 2)) * fi[i] * (tailterm[i]   
+                                                 - 2 * tailterm[i+1] + tailterm[i+2])
+  }
+  # Compute ai according to equation 17
+  ai <- aistar / as.vector(sqrt(aistar %*% aistar))
+  # Sort x (c.f. section above equation 1)
+  xs <- sort(x)
+  
+  # Compute meanX
+  meanX <- mean(xs)
+  
+  # Compute equation 3
+  S <- sum((xs - meanX)^2)
+  
+  # Compute W
+  W <- as.vector((ai %*% xs))^2 / S
+  
+  # Return the test statistic W
+  result<-W
+  
+  if(Interpret){
+  result<-paste0("The test statistic W of the Shapiro-Wilk test has the following value: ",W)
  }
- return(result)
-}  
-
-
-  
-  
- 
+  return(result)
+}
